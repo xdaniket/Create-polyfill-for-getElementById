@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <div>1</div>
+
+      <div>
+        2
+        <div id="inner-container">
+          <div id="message"><div id="annu">Aniket Thakur</div></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  //Q: How to create a polyfill for getElementById by using recursion function ?
+
+  // Step 1: Create a function and pass two parameters 1st.document.body, 2.given idName,
+  // Step 2: Create an empty string for showing the output.
+  // Step 3:    Use Object.keys method for getting the child of body element.
+  // Step 3.1 : Object.keys work fine properly on array, and  body return HTML collections in
+  //            which data is stored in key value pairs, that's why we are using here this method.
+  // Step 4: Ittrate a forEach loop on every child of body element, and store child element
+  //         in new variable and then use getAttribute method for getting the "id" inside an element.
+  // Step 5: Make a condition if attribute("id") is match from our given id so assign that
+  //         element in new empty string, if it is not match so.
+  // Step 6: Call that function recursively for finding the given id.
+
+  // with recursive method :
+
+  let result = "";
+  const getElementById = (bodyElement, idName) => {
+    Object.keys(bodyElement.children).forEach((child) => {
+      const childNode = bodyElement.children[child];
+      const getAttrbute = childNode.getAttribute("id");
+      getAttrbute === idName
+        ? (result = childNode)
+        : getElementById(childNode, idName);
+    });
+    return result;
+  };
+
+  console.log(getElementById(document.body, "annu").innerHTML);
+
+  // Check for Id :
+
+  const checkId = document.getElementById("annu").innerHTML;
+  console.log("checkId :", checkId);
+
+  //---------------------------------------------------------------------------------
+</script>
